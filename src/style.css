@@ -219,3 +219,88 @@ input[type="file"] {
   font-size: 18px;
   font-weight: 600;
 }
+
+svg {
+  background: var(--bg-sec);
+}
+
+path {
+  fill: var(--light-bg);
+}
+
+.user-content-section {
+  background: var(--light-bg);
+  padding-bottom: 50px;
+  overflow-x: hidden;
+}
+
+.user-content-wrapper {
+  padding: 0 15px;
+}
+
+.tabs-navigation {
+  width: 260px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-sec);
+  margin: 0 auto;
+  border-radius: 30px;
+  padding: 4px;
+  position: relative;
+  box-shadow: 0 3px 20px 2px var(--light-shadow);
+}
+
+.tabs-navigation .tab-button {
+  height: 50px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 400;
+  background: none;
+  color: var(--light-text);
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
+  z-index: 2;
+}
+
+.tab-indicator {
+  position: absolute;
+  width: 48.2%;
+  height: 50px;
+  left: 4px;
+  border: 2px solid #4B4B4B;
+  border-radius: 30px;
+  background: var(--light-btn-bg);
+  z-index: 1;
+}
+
+.user-gallery-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+  margin: 35px 0;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: flex;
+  animation: moving .5s ease;
+}
+
+@keyframes moving {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
