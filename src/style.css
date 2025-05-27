@@ -79,3 +79,143 @@
   font-size: 32px;
   color: var(--theme-icon);
 }
+
+/* Section Random Kitties */
+.section-random-cats {
+  padding: 60px 15px;
+  margin-top: 63px;
+  background: var(--bg-sec);
+}
+
+.random-cats-container {
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 30px;
+  text-align: center;
+  color: var(--light-colorText);
+}
+
+.main-gallery-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 35px;
+  margin: 35px 0;
+}
+
+.image-card {
+  position: relative;
+  width: 320px;
+  min-width: 200px;
+  max-width: 480px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image-card .like-button {
+  width: 40px;
+  height: 40px;
+  top: 20px;
+  right: 20px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #FFF;
+  border: none;
+  cursor: pointer;
+}
+
+.image-card .like-button i {
+  font-size: 28px;
+  color: #4B4B4B;
+  margin-top: 2px;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  min-width: 200px;
+  max-width: 480px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 4px solid #4B4B4B;
+  border-style: dashed;
+  text-align: center;
+  padding: 0 20px;
+  gap: 40px;
+}
+
+.upload-box.dragover {
+  border-color: #f99b9b;
+  background-color: var(--light-uploadBox-hd);
+}
+
+.upload-box:hover {
+  border-color: #f99b9b;
+  background-color: var(--light-uploadBox-hd);
+}
+
+.upload-box span,
+.upload-box i {
+  font-size: 20px;
+  color: #4B4B4B;
+}
+
+.upload-box i {
+  font-size: 34px;
+}
+
+input[type="file"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#refresh-button {
+  min-width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-colorText);
+  background: var(--light-btn-bg);
+  border-radius: 25px;
+  border: 2px solid #4B4B4B;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+#refresh-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px 1px var(--light-shadow);
+}
+
+#refresh-button i {
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -28,6 +28,37 @@
       </button>
     </div>
   </header>
+  <main>
+    <section class="section-random-cats">
+      <div class="random-cats-container">
+        <h1 class="section-title">Random Cats</h1>
+        <div class="main-gallery-grid">
+          <div class="image-card">
+            <button class="like-button" aria-label="toggle-like">
+              <i class='bx bx-heart'></i>
+            </button>
+            <img src="./public/kitty-1.jpg" alt="A cute cat">
+          </div>
+          <div class="image-card">
+            <button class="like-button" aria-label="toggle-like">
+              <i class='bx bx-heart'></i>
+            </button>
+            <img src="./public/kitty-1.jpg" alt="A cute cat">
+          </div>
+          <div class="upload-box ">
+            <input type="file" id="input-img" accept="image/*">
+            <span>Drag an image here or</span>
+            <i class='bx bx-plus-circle'></i>
+            <span>upload from your device</span>
+          </div>
+        </div>
+        <button id="refresh-button">
+          <i class='bx bx-refresh-ccw-alt'></i>
+          Refresh Kitties
+        </button>
+      </div>
+    </section>
+  </main>
   <script type="module" src="./src/main.js"></script>
 </body>
 
