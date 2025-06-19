@@ -95,6 +95,26 @@ function removeCards(container) {
     });
 }
 
+async function loadRandomCats() {
+    const res = await fetch(API_URL_RANDOM);
+    const randomCats = await res.json();
+    const normalizedData = randomCats.map(cat => normalizeCatData(cat, 'random'));
+    const catsToDisplay = normalizedData.slice(0, 2);
+    const galleryGrid = document.getElementById('random-cats');
+
+    if (res.status !== 200) {
+        console.log('Oops, something went wrong:', res.status);
+    } else {
+        const uploadBox = document.querySelector('.upload-box');
+        removeCards(galleryGrid);
+        createImageGallery(catsToDisplay, 'random-cats', 'random');
+
+        if (uploadBox) {
+            galleryGrid.insertAdjacentElement('beforeend', uploadBox);
+        }
+    }
+}
+
 function setupTabNavigation() {
     const contentPanels = document.querySelectorAll('.tab-panel');
     const tabs = document.querySelectorAll('.tab-button');
@@ -121,4 +141,5 @@ function setupTabNavigation() {
 
 document.addEventListener('DOMContentLoaded', () => {
     setupTabNavigation();
+    loadRandomCats();
 })
