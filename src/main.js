@@ -2,6 +2,7 @@ import { API_KEY } from './config.example.js';
 
 const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=2';
 const API_URL_FAVORITES = 'https://api.thecatapi.com/v1/favourites';
+const API_URL_FAVORITES_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}`;
 
 function createImageGallery(catsArray, idContainer, galleryType) {
     const galleryContainer = document.getElementById(idContainer);
@@ -153,6 +154,20 @@ async function saveToFavorites(id) {
 
     if (res.status !== 200) {
         console.log('Oops! Something went wrong. Please try againr');
+    } else {
+        loadFavoriteCats();
+    }
+}
+
+async function deleteFromFavorites(id) {
+    const res = await fetch(API_URL_FAVORITES_DELETE(id), {
+        method: 'DELETE',
+        headers: {
+            'X-API-KEY': API_KEY,
+        }
+    });
+    if (res.status !== 200) {
+        console.log('There was an error');
     } else {
         loadFavoriteCats();
     }
