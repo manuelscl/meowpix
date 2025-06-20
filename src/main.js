@@ -4,6 +4,15 @@ const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=2';
 const API_URL_FAVORITES = 'https://api.thecatapi.com/v1/favourites';
 const API_URL_FAVORITES_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}`;
 
+const refreshCats = document.getElementById('refresh-button');
+const form = document.getElementById('uploadingForm');
+const uploadButton = document.getElementById('input-img');
+const uploadFileBtn = document.querySelector('.upload-file-btn');
+const chooseFileBtn = document.querySelector('.choose-file-btn');
+const chosenImage = document.getElementById('chosen-image');
+const uploadBoxImg = document.querySelector('.upload-box-img');
+const uploadBoxContent = document.querySelector('.upload-box-content');
+
 function createImageGallery(catsArray, idContainer, galleryType) {
     const galleryContainer = document.getElementById(idContainer);
 
@@ -173,6 +182,21 @@ async function deleteFromFavorites(id) {
     }
 }
 
+function addImageToUploadBox() {
+    const reader = new FileReader();
+    reader.readAsDataURL(uploadButton.files[0]);
+
+    reader.onload = () => {
+        uploadBoxImg.style.display = 'flex';
+        uploadBoxContent.style.display = 'none';
+        chosenImage.setAttribute('src', reader.result);
+
+        setTimeout(() => {
+            uploadBoxImg.classList.add('active');
+        }, 1000);
+    };
+}
+
 function setupTabNavigation() {
     const contentPanels = document.querySelectorAll('.tab-panel');
     const tabs = document.querySelectorAll('.tab-button');
@@ -202,3 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadRandomCats();
     loadFavoriteCats();
 })
+
+uploadButton.onchange = () => {
+    addImageToUploadBox();
+};
