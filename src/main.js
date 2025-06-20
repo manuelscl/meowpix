@@ -196,7 +196,9 @@ async function uploadCatImage(file) {
 
     if (res.ok) {
         const data = await res.json();
-        console.log("Uploaded Image:", data);
+        let images = getUploadedImages();
+        images.push(data);
+        saveUploadedImages(images);
     } else {
         console.log("Something went wrong. Code:", res.status);
     }
@@ -215,6 +217,15 @@ function addImageToUploadBox() {
             uploadBoxImg.classList.add('active');
         }, 1000);
     };
+}
+
+function getUploadedImages() {
+    const imagesJSON = localStorage.getItem('uploadedImages');
+    return imagesJSON ? JSON.parse(imagesJSON) : [];
+}
+
+function saveUploadedImages(images) {
+    localStorage.setItem('uploadedImages', JSON.stringify(images));
 }
 
 function setupTabNavigation() {
