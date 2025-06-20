@@ -281,3 +281,5 @@ uploadFileBtn.addEventListener('click', () => {
     uploadBoxImg.classList.remove('active');
     loadMyUploads();
 });
+
+refreshCats.addEventListener('click', loadRandomCats);
