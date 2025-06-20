@@ -199,6 +199,7 @@ async function uploadCatImage(file) {
         let images = getUploadedImages();
         images.push(data);
         saveUploadedImages(images);
+        loadMyUploads();
     } else {
         console.log("Something went wrong. Code:", res.status);
     }
@@ -226,6 +227,15 @@ function getUploadedImages() {
 
 function saveUploadedImages(images) {
     localStorage.setItem('uploadedImages', JSON.stringify(images));
+}
+
+function loadMyUploads() {
+    const galleryContainer = document.getElementById('myUploads-gallery');
+    const imagesString = localStorage.getItem('uploadedImages');
+    const images = JSON.parse(imagesString) || [];
+    const normalizedData = images.map(cat => normalizeCatData(cat, 'upload'));
+    removeCards(galleryContainer);
+    createImageGallery(normalizedData, 'myUploads-gallery', 'myuploads');
 }
 
 function setupTabNavigation() {
@@ -256,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupTabNavigation();
     loadRandomCats();
     loadFavoriteCats();
+    loadMyUploads();
 })
 
 uploadButton.onchange = () => {
@@ -268,4 +279,5 @@ uploadFileBtn.addEventListener('click', () => {
     uploadBoxContent.style.display = 'flex';
     chosenImage.removeAttribute('src');
     uploadBoxImg.classList.remove('active');
+    loadMyUploads();
 });
