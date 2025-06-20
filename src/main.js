@@ -3,6 +3,7 @@ import { API_KEY } from './config.example.js';
 const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=2';
 const API_URL_FAVORITES = 'https://api.thecatapi.com/v1/favourites';
 const API_URL_FAVORITES_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}`;
+const API_URL_UPLOAD = 'https://api.thecatapi.com/v1/images/upload';
 
 const refreshCats = document.getElementById('refresh-button');
 const form = document.getElementById('uploadingForm');
@@ -182,6 +183,25 @@ async function deleteFromFavorites(id) {
     }
 }
 
+async function uploadCatImage(file) {
+    const formData = new FormData(file);
+
+    const res = await fetch(API_URL_UPLOAD, {
+        method: "POST",
+        headers: {
+            "X-API-KEY": API_KEY,
+        },
+        body: formData,
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        console.log("Uploaded Image:", data);
+    } else {
+        console.log("Something went wrong. Code:", res.status);
+    }
+}
+
 function addImageToUploadBox() {
     const reader = new FileReader();
     reader.readAsDataURL(uploadButton.files[0]);
@@ -230,3 +250,11 @@ document.addEventListener('DOMContentLoaded', () => {
 uploadButton.onchange = () => {
     addImageToUploadBox();
 };
+
+uploadFileBtn.addEventListener('click', () => {
+    uploadCatImage(form);
+    uploadBoxImg.style.display = 'none';
+    uploadBoxContent.style.display = 'flex';
+    chosenImage.removeAttribute('src');
+    uploadBoxImg.classList.remove('active');
+});
