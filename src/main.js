@@ -1,4 +1,4 @@
-import { API_KEY } from "./config.example.js";
+import { API_KEY } from './config.example.js';
 
 const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=2';
 const API_URL_FAVORITES = 'https://api.thecatapi.com/v1/favourites';
@@ -134,6 +134,27 @@ async function loadFavoriteCats() {
     } else {
         removeCards(galleryContainer);
         createImageGallery(normalizedData, 'favorites-gallery', 'favorites');
+    }
+}
+
+async function saveToFavorites(id) {
+    const res = await fetch(API_URL_FAVORITES, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-API-KEY': API_KEY,
+        },
+        body: JSON.stringify({
+            image_id: id,
+        }),
+    });
+
+    // const data = await res.json();
+
+    if (res.status !== 200) {
+        console.log('Oops! Something went wrong. Please try againr');
+    } else {
+        loadFavoriteCats();
     }
 }
 
