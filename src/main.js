@@ -1,4 +1,7 @@
+import { API_KEY } from "./config.example.js";
+
 const API_URL_RANDOM = 'https://api.thecatapi.com/v1/images/search?limit=2';
+const API_URL_FAVORITES = 'https://api.thecatapi.com/v1/favourites';
 
 function createImageGallery(catsArray, idContainer, galleryType) {
     const galleryContainer = document.getElementById(idContainer);
@@ -115,6 +118,25 @@ async function loadRandomCats() {
     }
 }
 
+async function loadFavoriteCats() {
+    const res = await fetch(API_URL_FAVORITES, {
+        method: 'GET',
+        headers: {
+            'X-API-KEY': API_KEY,
+        },
+    });
+    const galleryContainer = document.getElementById('favorites-gallery');
+    const favoriteCats = await res.json();
+    const normalizedData = favoriteCats.map(cat => normalizeCatData(cat, 'favorite'));
+
+    if (res.status !== 200) {
+        console.log('There was an error');
+    } else {
+        removeCards(galleryContainer);
+        createImageGallery(normalizedData, 'favorites-gallery', 'favorites');
+    }
+}
+
 function setupTabNavigation() {
     const contentPanels = document.querySelectorAll('.tab-panel');
     const tabs = document.querySelectorAll('.tab-button');
@@ -142,4 +164,5 @@ function setupTabNavigation() {
 document.addEventListener('DOMContentLoaded', () => {
     setupTabNavigation();
     loadRandomCats();
+    loadFavoriteCats();
 })
