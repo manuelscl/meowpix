@@ -262,11 +262,57 @@ function setupTabNavigation() {
     });
 }
 
+const btnToggleTheme = document.getElementById('toggle-theme');
+const iconToggleTheme = document.querySelector('.bx-sun');
+const logoImg = document.querySelector('.logo img');
+const htmlTheme = document.querySelector('html');
+
+const logoLight = './public/meowpix-logo-w.webp';
+const logoDark = './public/meowpix-logo.webp';
+
+function toggleTheme() {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark') {
+        htmlTheme.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        iconToggleTheme.classList.remove('bx-moon');
+        iconToggleTheme.classList.add('bx-sun');
+        logoImg.src = logoDark;
+    } else {
+        htmlTheme.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        console.log(iconToggleTheme);
+        iconToggleTheme.classList.remove('bx-sun');
+        iconToggleTheme.classList.add('bx-moon');
+        logoImg.src = logoLight;
+    }
+}
+
+function loadThemeFromLocalStorage() {
+    const theme = localStorage.getItem('theme');
+
+    if (theme === 'dark') {
+        htmlTheme.setAttribute('data-theme', 'dark');
+        iconToggleTheme.classList.remove('bx-sun');
+        iconToggleTheme.classList.add('bx-moon');
+        logoImg.src = logoLight;
+    } else {
+        htmlTheme.removeAttribute('data-theme');
+        iconToggleTheme.classList.remove('bx-moon');
+        iconToggleTheme.classList.add('bx-sun');
+        logoImg.src = logoDark;
+    }
+}
+
+btnToggleTheme.addEventListener('click', toggleTheme);
+
 document.addEventListener('DOMContentLoaded', () => {
     setupTabNavigation();
     loadRandomCats();
     loadFavoriteCats();
     loadMyUploads();
+    loadThemeFromLocalStorage();
 })
 
 uploadButton.onchange = () => {
